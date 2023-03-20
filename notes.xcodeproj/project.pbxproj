@@ -16,6 +16,7 @@
 		4E7EF1AB29C7746D00FCDB85 /* note.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF1A929C7746D00FCDB85 /* note.xcdatamodeld */; };
 		4E7EF1AE29C7754600FCDB85 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF1AD29C7754600FCDB85 /* CoreDataManager.swift */; };
 		4E7EF1B329C7EF5E00FCDB85 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF1B229C7EF5E00FCDB85 /* NoteTableViewCell.swift */; };
+		4E7EF1B729C81B1300FCDB85 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7EF1B629C81B1300FCDB85 /* NoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4E7EF1AA29C7746D00FCDB85 /* note.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = note.xcdatamodel; sourceTree = "<group>"; };
 		4E7EF1AD29C7754600FCDB85 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4E7EF1B229C7EF5E00FCDB85 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		4E7EF1B629C81B1300FCDB85 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		4E7EF1B529C7F00000FCDB85 /* NoteVC */ = {
 			isa = PBXGroup;
 			children = (
+				4E7EF1B629C81B1300FCDB85 /* NoteViewController.swift */,
 			);
 			path = NoteVC;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7EF1B729C81B1300FCDB85 /* NoteViewController.swift in Sources */,
 				4E7EF1AE29C7754600FCDB85 /* CoreDataManager.swift in Sources */,
 				4E7EF19429C5C12300FCDB85 /* NotesTableViewController.swift in Sources */,
 				4E7EF1AB29C7746D00FCDB85 /* note.xcdatamodeld in Sources */,
