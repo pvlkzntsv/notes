@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct note {
+struct note1 {
     var name: String?
     var text: String
 }
