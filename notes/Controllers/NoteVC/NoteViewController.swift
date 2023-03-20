@@ -8,14 +8,14 @@
 import UIKit
 
 protocol NoteDelegate: AnyObject {
-    func addNote(sender: NoteViewController)
+    func addNote(note: Note, index: Int)
 }
 
 class NoteViewController: UIViewController {
     
     weak var delegate: NoteDelegate?
-    
-//    var note = Note(context: CoreDataManager.shared.context)
+    private var noteIndex = 0
+    var note = Note(context: CoreDataManager.shared.context)
 
 //MARK: - Elements
     private let titleHeaderLabel: UILabel = {
@@ -52,28 +52,46 @@ class NoteViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setConstraints()
-        view.backgroundColor = .white
+        print(noteIndex)
+
     }
     
 //MARK: -Configure
+    func configure(cellIndex: Int, note: Note) {
+        noteIndex = cellIndex
+        noteTitleTextFild.text = note.title
+        noteBodyTextView.text = note.note
+    }
+    
     
     
 //MARK: -Save
+     @objc private func saveNoteButtonPressed() {
+         note.title = self.noteTitleTextFild.text
+         note.note = self.noteBodyTextView.text
+         CoreDataManager.shared.save()
+         self.navigationController?.popViewController(animated: true)
+         self.delegate?.addNote(note: note, index: noteIndex)
+        
+    }
     
     
 //MARK: -SetupUI
-    func setupUI() {
+    private func setupUI() {
+        view.backgroundColor = .white
         view.backgroundColor = .white
         view.addSubview(titleHeaderLabel)
         view.addSubview(noteTitleTextFild)
         view.addSubview(noteHeaderLabel)
         view.addSubview(noteBodyTextView)
-        navigationItem.title = "Note"
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveNoteButtonPressed))
+        
         
     }
     
     //MARK: -SetConstraints
-    func setConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             
             titleHeaderLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),

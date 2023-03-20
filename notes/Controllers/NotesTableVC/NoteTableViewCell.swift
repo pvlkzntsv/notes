@@ -15,11 +15,11 @@ final class NoteTableViewCell: UITableViewCell {
     
     weak var delegate: NoteTableViewCellDelegate?
     
-    
+ //MARK: - Elements
     private let backgroundCell: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 20
-        view.backgroundColor = #colorLiteral(red: 1, green: 0.9338082533, blue: 0.7223893823, alpha: 1)
+        view.layer.cornerRadius = 15
+        view.backgroundColor = #colorLiteral(red: 0.9813399911, green: 0.9542712569, blue: 0.8666041493, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -27,7 +27,7 @@ final class NoteTableViewCell: UITableViewCell {
     private let noteTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 30)
+        label.font = .systemFont(ofSize: 25)
 //        label.backgroundColor = .red
         label.text = "Note title"
         return label
@@ -37,25 +37,29 @@ final class NoteTableViewCell: UITableViewCell {
          let label = UILabel()
          label.translatesAutoresizingMaskIntoConstraints = false
 //         label.backgroundColor = .yellow
-         label.textAlignment = .left
-//         label.textAlignment = .justified
+         label.numberOfLines = 0
+         label.font = .systemFont(ofSize: 12)
          return label
     }()
     
-    var deleteNoteButtom: UIButton = {
+    private let deleteNoteButtom: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(nil, action: #selector(deleteButtonTapped), for: .touchUpInside)
         button.setImage(UIImage(systemName: "trash"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = UIColor(white: 0.5, alpha: 50)
        return button
    }()
     
     @objc func deleteButtonTapped() {
         delegate?.cellDeleteTapped(sender: self)
     }
-    
-    
+
+//MARK: - Configure
+    func configure(_ note: Note) {
+        noteTitleLabel.text = note.title
+        noteTextLable.text = note.note
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -67,33 +71,33 @@ final class NoteTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    func setupUI() {
+//MARK: - SetupUI
+    private func setupUI() {
         backgroundCell.addSubview(noteTitleLabel)
         backgroundCell.addSubview(noteTextLable)
         backgroundCell.addSubview(deleteNoteButtom)
         contentView.addSubview(backgroundCell)
         selectionStyle = .none
     }
-    
-    func setConstraints() {
+//MARK: - SetConstraints
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             backgroundCell.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             backgroundCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             backgroundCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             backgroundCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            noteTitleLabel.topAnchor.constraint(equalTo: backgroundCell.topAnchor, constant: 5),
-            noteTitleLabel.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 30),
+            noteTitleLabel.topAnchor.constraint(equalTo: backgroundCell.topAnchor, constant: 20),
+            noteTitleLabel.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 20),
             noteTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            deleteNoteButtom.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -5),
-            deleteNoteButtom.topAnchor.constraint(equalTo: backgroundCell.topAnchor,constant: 5),
+            deleteNoteButtom.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -10),
+            deleteNoteButtom.topAnchor.constraint(equalTo: backgroundCell.topAnchor,constant: 10),
             
-            noteTextLable.topAnchor.constraint(equalTo: noteTitleLabel.bottomAnchor, constant: 5),
-            noteTextLable.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 5),
-            noteTextLable.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -5),
-            noteTextLable.bottomAnchor.constraint(equalTo: backgroundCell.bottomAnchor, constant: -5),
+            noteTextLable.topAnchor.constraint(equalTo: noteTitleLabel.bottomAnchor, constant: 10),
+            noteTextLable.leadingAnchor.constraint(equalTo: backgroundCell.leadingAnchor, constant: 20),
+            noteTextLable.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -50),
+            noteTextLable.bottomAnchor.constraint(lessThanOrEqualTo: backgroundCell.bottomAnchor, constant: -5),
             
             
         ])

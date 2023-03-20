@@ -18,8 +18,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
         let controller = NotesTableViewController()
+//        let controller = NoteViewController()
         let navController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navController
+        
+        if UserDefaults.standard.bool(forKey: "isFirstOpen") {
+            
+        } else {
+            let note = Note(context: CoreDataManager.shared.context)
+            note.title = "First note"
+            note.note = "Hello"
+            CoreDataManager.shared.save()
+            UserDefaults.standard.set(true, forKey: "isFirstOpen")
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -10,18 +10,31 @@ import CoreData
 
 class CoreDataManager {
     
-    static let shared = CoreDataManager()
+    static let shared = CoreDataManager(modelName: "note")
     
-    let persistentContainer = NSPersistentContainer(name: "note")
+    init(modelName: String) {
+        persistentContainer = NSPersistentContainer(name: modelName)
+    }
+    let persistentContainer: NSPersistentContainer
+//    let persistentContainer = NSPersistentContainer(name: "note")
     var context: NSManagedObjectContext {
         persistentContainer.viewContext
     }
-    
+
     func fetchData() -> [Note] {
         let request = Note.fetchRequest()
         let sortDescriptor = NSSortDescriptor(keyPath: \Note.title, ascending: true)
         request.sortDescriptors = [sortDescriptor]
         return try! context.fetch(request)
+    }
+    
+    func load(completion: (() -> Void)? = nil) {
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError(error!.localizedDescription)
+            }
+            completion?()
+        }
     }
     
     func save() {
