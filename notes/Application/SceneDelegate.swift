@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
-        let controller = notesTableViewController()
+        let controller = NotesTableViewController()
         let navController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navController
     }
